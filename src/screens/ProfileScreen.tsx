@@ -7,8 +7,10 @@ import {
   TouchableOpacity,
   Image,
   Platform,
+  Alert,
 } from 'react-native';
 import { Ionicons, MaterialCommunityIcons } from '@expo/vector-icons';
+import { CommonActions } from '@react-navigation/native';
 import { styles } from './ProfileScreenStyles';
 
 export default function ProfileScreen({ navigation }: any): React.JSX.Element {
@@ -136,7 +138,31 @@ export default function ProfileScreen({ navigation }: any): React.JSX.Element {
           </View>
 
           {/* ── Logout Button ── */}
-          <TouchableOpacity style={styles.logoutBtn} activeOpacity={0.7}>
+          <TouchableOpacity 
+            style={styles.logoutBtn} 
+            activeOpacity={0.7}
+            onPress={() => {
+              Alert.alert(
+                "Confirm Logout",
+                "Are you sure you want to log out from KaamSetu?",
+                [
+                  { text: "Cancel", style: "cancel" },
+                  { 
+                    text: "Logout", 
+                    style: "destructive",
+                    onPress: () => {
+                      navigation.dispatch(
+                        CommonActions.reset({
+                          index: 0,
+                          routes: [{ name: 'Login' }],
+                        })
+                      );
+                    }
+                  }
+                ]
+              );
+            }}
+          >
             <MaterialCommunityIcons name="logout" size={20} color="#ff5252" />
             <Text style={styles.logoutText}>LOGOUT</Text>
           </TouchableOpacity>
