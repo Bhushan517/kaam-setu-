@@ -36,7 +36,7 @@ export default function PostWorkScreen({ navigation }: any): React.JSX.Element {
               Kaam<Text style={styles.appBarTitleSecondary}>Setu</Text>
             </Text>
           </View>
-          <TouchableOpacity style={styles.bellIcon}>
+          <TouchableOpacity style={styles.bellIcon} onPress={() => navigation.navigate('Notifications')}>
             <Ionicons name="notifications" size={22} color="#b070ff" />
           </TouchableOpacity>
         </View>

@@ -34,7 +34,7 @@ export default function DashboardScreen({ navigation }: any): React.JSX.Element 
               </Text>
             </View>
           </View>
-          <TouchableOpacity style={styles.bellIcon}>
+          <TouchableOpacity style={styles.bellIcon} onPress={() => navigation.navigate('Notifications')}>
             <Ionicons name="notifications" size={22} color="#b070ff" />
           </TouchableOpacity>
         </View>

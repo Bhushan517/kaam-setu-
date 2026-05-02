@@ -10,6 +10,9 @@ export type RootStackParamList = {
   PostWork: undefined;
   History: undefined;
   Profile: undefined;
+  Chat: undefined;
+  Rating: undefined;
+  Notifications: undefined;
 };
 
 // ── API ─────────────────────────────────────────────────────────────────────
