@@ -1,0 +1,41 @@
+{
+  "login": {
+    "welcome": "Welcome to KaamSetu",
+    "subtitle": "Enter your mobile number to get started",
+    "phoneLabel": "Phone Number",
+    "phonePlaceholder": "Mobile Number",
+    "sendOtp": "Send OTP",
+    "agreeText": "By continuing, you agree to our",
+    "terms": "Terms & Conditions",
+    "privacy": "Privacy Policy"
+  },
+  "roles": {
+    "overline": "ONBOARDING JOURNEY",
+    "title": "Choose your role",
+    "subtitle": "Select how you want to experience the platform today. You can always switch later.",
+    "customerTitle": "I need help",
+    "customerDesc": "Browse verified services, book top-rated pros, and get your tasks done instantly.",
+    "selectCustomer": "SELECT CUSTOMER",
+    "providerTitle": "I want work",
+    "providerDesc": "Create your professional profile, find nearby gigs, and grow your local business.",
+    "selectProvider": "SELECT PROVIDER",
+    "agreeText": "By continuing, you agree to our",
+    "termsOfService": "Terms of Service",
+    "and": "and",
+    "privacyPolicy": "Privacy Policy"
+  },
+  "profile": {
+    "accountSettings": "ACCOUNT SETTINGS",
+    "editProfile": "Edit Profile",
+    "languageSwitch": "Language Switch",
+    "currentLanguage": "Currently: English",
+    "preferences": "PREFERENCES",
+    "wallet": "Wallet & Payments",
+    "appSettings": "App Settings",
+    "logout": "LOGOUT",
+    "logoutConfirmTitle": "Confirm Logout",
+    "logoutConfirmMsg": "Are you sure you want to log out from KaamSetu?",
+    "cancel": "Cancel",
+    "footerText": "KAAMSETU V2.4.0 • BUILT FOR BHARATA" 
+  }
+}

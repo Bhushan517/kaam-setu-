@@ -11,6 +11,7 @@ import {
 } from 'react-native';
 import { Ionicons, MaterialCommunityIcons } from '@expo/vector-icons';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
+import { useTranslation } from 'react-i18next';
 import { RootStackParamList } from '../types';
 import { Colors, Spacing, BorderRadius, FontSize } from '../constants/theme';
 import { LinearGradient } from 'expo-linear-gradient';
@@ -21,6 +22,8 @@ type Props = NativeStackScreenProps<RootStackParamList, 'UserSelection'>;
 const { width } = Dimensions.get('window');
 
 export default function UserSelectionScreen({ navigation }: Props): React.JSX.Element {
+  const { t } = useTranslation();
+
   return (
     <View style={styles.root}>
       <StatusBar barStyle="light-content" backgroundColor="#0a0a0f" />
@@ -46,10 +49,10 @@ export default function UserSelectionScreen({ navigation }: Props): React.JSX.El
         <View style={styles.webContainer}>
           {/* ── Header Section ── */}
         <View style={styles.headerSection}>
-          <Text style={styles.overline}>ONBOARDING JOURNEY</Text>
-          <Text style={styles.title}>Choose your role</Text>
+          <Text style={styles.overline}>{t('roles.overline')}</Text>
+          <Text style={styles.title}>{t('roles.title')}</Text>
           <Text style={styles.subtitle}>
-            Select how you want to experience the platform today. You can always switch later.
+            {t('roles.subtitle')}
           </Text>
         </View>
 
@@ -65,13 +68,13 @@ export default function UserSelectionScreen({ navigation }: Props): React.JSX.El
             <Ionicons name="flash" size={24} color="#d4a5ff" />
           </View>
 
-          <Text style={styles.cardTitle}>I need help</Text>
+          <Text style={styles.cardTitle}>{t('roles.customerTitle')}</Text>
           <Text style={styles.cardDesc}>
-            Browse verified services, book top-rated pros, and get your tasks done instantly.
+            {t('roles.customerDesc')}
           </Text>
 
           <View style={styles.actionRow}>
-            <Text style={styles.actionTextPurple}>SELECT CUSTOMER</Text>
+            <Text style={styles.actionTextPurple}>{t('roles.selectCustomer')}</Text>
             <Ionicons name="arrow-forward" size={18} color="#d4a5ff" />
           </View>
 
@@ -96,13 +99,13 @@ export default function UserSelectionScreen({ navigation }: Props): React.JSX.El
             <MaterialCommunityIcons name="toolbox" size={24} color="#00d2ff" />
           </View>
 
-          <Text style={styles.cardTitle}>I want work</Text>
+          <Text style={styles.cardTitle}>{t('roles.providerTitle')}</Text>
           <Text style={styles.cardDesc}>
-            Create your professional profile, find nearby gigs, and grow your local business.
+            {t('roles.providerDesc')}
           </Text>
 
           <View style={styles.actionRow}>
-            <Text style={styles.actionTextCyan}>SELECT PROVIDER</Text>
+            <Text style={styles.actionTextCyan}>{t('roles.selectProvider')}</Text>
             <Ionicons name="arrow-forward" size={18} color="#00d2ff" />
           </View>
 
@@ -122,10 +125,10 @@ export default function UserSelectionScreen({ navigation }: Props): React.JSX.El
       <View style={styles.footer}>
         <View style={styles.webContainer}>
           <Text style={styles.footerText}>
-            By continuing, you agree to our{' '}
-            <Text style={styles.footerLinkPurple}>Terms of Service</Text>
-            {' '}and{' '}
-            <Text style={styles.footerLinkPurple}>Privacy Policy</Text>
+            {t('roles.agreeText')}{' '}
+            <Text style={styles.footerLinkPurple}>{t('roles.termsOfService')}</Text>
+            {' '}{t('roles.and')}{' '}
+            <Text style={styles.footerLinkPurple}>{t('roles.privacyPolicy')}</Text>
           </Text>
         </View>
       </View>

@@ -11,9 +11,21 @@ import {
 } from 'react-native';
 import { Ionicons, MaterialCommunityIcons } from '@expo/vector-icons';
 import { CommonActions } from '@react-navigation/native';
+import { useTranslation } from 'react-i18next';
 import { styles } from './ProfileScreenStyles';
 
 export default function ProfileScreen({ navigation }: any): React.JSX.Element {
+  const { t, i18n } = useTranslation();
+
+  const handleLanguageSwitch = () => {
+    // Simple cycle between en -> mr -> hi -> en
+    let nextLang = 'en';
+    if (i18n.language === 'en') nextLang = 'mr';
+    else if (i18n.language === 'mr') nextLang = 'hi';
+    
+    i18n.changeLanguage(nextLang);
+  };
+
   return (
     <View style={styles.root}>
       {/* ── Top Header ── */}
@@ -85,41 +97,41 @@ export default function ProfileScreen({ navigation }: any): React.JSX.Element {
           </View>
 
           {/* ── Account Settings ── */}
-          <Text style={styles.sectionTitle}>ACCOUNT SETTINGS</Text>
+          <Text style={styles.sectionTitle}>{t('profile.accountSettings')}</Text>
           <View style={styles.menuCard}>
             <TouchableOpacity style={styles.menuItem} activeOpacity={0.7}>
               <View style={[styles.menuIconBox, { backgroundColor: 'rgba(176, 112, 255, 0.15)' }]}>
                 <MaterialCommunityIcons name="account-edit" size={18} color="#b070ff" />
               </View>
               <View style={styles.menuTextCol}>
-                <Text style={styles.menuTitle}>Edit Profile</Text>
+                <Text style={styles.menuTitle}>{t('profile.editProfile')}</Text>
               </View>
               <Ionicons name="chevron-forward" size={18} color="#6b7280" />
             </TouchableOpacity>
 
             <View style={styles.divider} />
 
-            <TouchableOpacity style={styles.menuItem} activeOpacity={0.7}>
+            <TouchableOpacity style={styles.menuItem} activeOpacity={0.7} onPress={handleLanguageSwitch}>
               <View style={[styles.menuIconBox, { backgroundColor: 'rgba(0, 210, 255, 0.15)' }]}>
                 <Ionicons name="globe-outline" size={18} color="#00d2ff" />
               </View>
               <View style={styles.menuTextCol}>
-                <Text style={styles.menuTitle}>Language Switch</Text>
-                <Text style={styles.menuSubTitle}>Currently: English</Text>
+                <Text style={styles.menuTitle}>{t('profile.languageSwitch')}</Text>
+                <Text style={styles.menuSubTitle}>{i18n.language === 'mr' ? 'सध्या: मराठी' : i18n.language === 'hi' ? 'वर्तमान: हिंदी' : 'Currently: English'}</Text>
               </View>
               <MaterialCommunityIcons name="translate" size={20} color="#a0a8c0" />
             </TouchableOpacity>
           </View>
 
           {/* ── Preferences ── */}
-          <Text style={styles.sectionTitle}>PREFERENCES</Text>
+          <Text style={styles.sectionTitle}>{t('profile.preferences')}</Text>
           <View style={styles.menuCard}>
             <TouchableOpacity style={styles.menuItem} activeOpacity={0.7}>
               <View style={[styles.menuIconBox, { backgroundColor: 'rgba(76, 175, 80, 0.15)' }]}>
                 <Ionicons name="card" size={18} color="#4caf50" />
               </View>
               <View style={styles.menuTextCol}>
-                <Text style={styles.menuTitle}>Wallet & Payments</Text>
+                <Text style={styles.menuTitle}>{t('profile.wallet')}</Text>
               </View>
               <Ionicons name="chevron-forward" size={18} color="#6b7280" />
             </TouchableOpacity>
@@ -131,7 +143,7 @@ export default function ProfileScreen({ navigation }: any): React.JSX.Element {
                 <Ionicons name="settings-sharp" size={18} color="#c4c4c4" />
               </View>
               <View style={styles.menuTextCol}>
-                <Text style={styles.menuTitle}>App Settings</Text>
+                <Text style={styles.menuTitle}>{t('profile.appSettings')}</Text>
               </View>
               <Ionicons name="chevron-forward" size={18} color="#6b7280" />
             </TouchableOpacity>
@@ -143,12 +155,12 @@ export default function ProfileScreen({ navigation }: any): React.JSX.Element {
             activeOpacity={0.7}
             onPress={() => {
               Alert.alert(
-                "Confirm Logout",
-                "Are you sure you want to log out from KaamSetu?",
+                t('profile.logoutConfirmTitle'),
+                t('profile.logoutConfirmMsg'),
                 [
-                  { text: "Cancel", style: "cancel" },
+                  { text: t('profile.cancel'), style: "cancel" },
                   { 
-                    text: "Logout", 
+                    text: t('profile.logout'), 
                     style: "destructive",
                     onPress: () => {
                       navigation.dispatch(
@@ -164,11 +176,11 @@ export default function ProfileScreen({ navigation }: any): React.JSX.Element {
             }}
           >
             <MaterialCommunityIcons name="logout" size={20} color="#ff5252" />
-            <Text style={styles.logoutText}>LOGOUT</Text>
+            <Text style={styles.logoutText}>{t('profile.logout')}</Text>
           </TouchableOpacity>
 
           {/* ── Footer ── */}
-          <Text style={styles.footerText}>KAAMSETU V2.4.0 • BUILT FOR BHARATA</Text>
+          <Text style={styles.footerText}>{t('profile.footerText')}</Text>
           
           <View style={{ height: 80 }} />
         </View>

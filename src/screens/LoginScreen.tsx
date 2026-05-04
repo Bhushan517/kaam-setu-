@@ -16,6 +16,7 @@ import {
 import { LinearGradient } from 'expo-linear-gradient';
 import { Ionicons, MaterialCommunityIcons } from '@expo/vector-icons';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
+import { useTranslation } from 'react-i18next';
 import { RootStackParamList } from '../types';
 import Button from '../components/Button';
 import Input from '../components/Input';
@@ -35,9 +36,12 @@ const LANGUAGES: Language[] = [
 ];
 
 export default function LoginScreen({ navigation }: Props): React.JSX.Element {
+  const { t, i18n } = useTranslation();
   const [phone, setPhone] = useState('');
   const [loading, setLoading] = useState(false);
-  const [selectedLang, setSelectedLang] = useState<Language>(LANGUAGES[0]);
+  const [selectedLang, setSelectedLang] = useState<Language>(
+    LANGUAGES.find(l => l.code === i18n.language) || LANGUAGES[0]
+  );
   const [showLangMenu, setShowLangMenu] = useState(false);
 
   const logoScale = useRef(new Animated.Value(0.7)).current;
@@ -123,7 +127,11 @@ export default function LoginScreen({ navigation }: Props): React.JSX.Element {
                     <TouchableOpacity
                       key={lang.code}
                       style={[styles.langOption, selectedLang.code === lang.code && styles.langOptionActive]}
-                      onPress={() => { setSelectedLang(lang); setShowLangMenu(false); }}
+                      onPress={() => { 
+                        setSelectedLang(lang); 
+                        setShowLangMenu(false); 
+                        i18n.changeLanguage(lang.code);
+                      }}
                     >
                       <Text style={[styles.langOptionText, selectedLang.code === lang.code && styles.langOptionActive]}>
                         {lang.label}
@@ -150,8 +158,8 @@ export default function LoginScreen({ navigation }: Props): React.JSX.Element {
           {/* ── Titles ── */}
           <Animated.View style={[styles.titleSection, { opacity: contentOpacity, transform: [{ translateY: contentSlide }] }]}>
             <Text style={styles.brandName}>KaamSetu</Text>
-            <Text style={styles.welcomeEn}>Welcome to KaamSetu</Text>
-            <Text style={styles.welcomeMr}>कामसेतू मध्ये आपले स्वागत आहे</Text>
+            <Text style={styles.welcomeEn}>{t('login.welcome')}</Text>
+            <Text style={styles.welcomeMr}>{t('login.subtitle')}</Text>
           </Animated.View>
 
           {/* ── Hero Image ── */}
@@ -164,7 +172,7 @@ export default function LoginScreen({ navigation }: Props): React.JSX.Element {
 
           {/* ── Input Card ── */}
           <Animated.View style={[styles.inputCard, { opacity: contentOpacity, transform: [{ translateY: contentSlide }] }]}>
-            <Text style={styles.inputLabel}>MOBILE NUMBER / मोबाईल नंबर</Text>
+            <Text style={styles.inputLabel}>{t('login.phoneLabel')}</Text>
 
             <View style={styles.phoneRow}>
               <View style={styles.countryCode}>
@@ -181,7 +189,7 @@ export default function LoginScreen({ navigation }: Props): React.JSX.Element {
             </View>
 
             <Button
-              label="Continue with OTP"
+              label={t('login.sendOtp')}
               onPress={handleContinue}
               loading={loading}
               icon={<Ionicons name="arrow-forward" size={20} color="#fff" />}
@@ -215,10 +223,10 @@ export default function LoginScreen({ navigation }: Props): React.JSX.Element {
 
             <View style={styles.footer}>
               <Text style={styles.footerText}>
-                By continuing, you agree to KaamSetu's{' '}
-                <Text style={styles.footerLink}>Terms of Service</Text>
+                {t('login.agreeText')}{' '}
+                <Text style={styles.footerLink}>{t('login.terms')}</Text>
                 {' & '}
-                <Text style={styles.footerLink}>Privacy Policy</Text>.
+                <Text style={styles.footerLink}>{t('login.privacy')}</Text>.
               </Text>
             </View>
           </View>
